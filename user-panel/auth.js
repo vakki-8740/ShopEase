@@ -92,17 +92,24 @@ async function registerUser(e) {
         const cred = await auth.createUserWithEmailAndPassword(email, password);
         await cred.user.updateProfile({ displayName: name });
 
+        // Check if admin email - auto set admin role
+        const userRole = (email === ADMIN_EMAIL) ? 'admin' : 'user';
+
         // Save user data in Firestore
         await db.collection('users').doc(cred.user.uid).set({
             name: name,
             email: email,
             phone: phone,
-            role: 'user',
+            role: userRole,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
         closeAuthModal();
-        showToast('Registration successful!', 'success');
+        if (userRole === 'admin') {
+            showToast('Admin account created! You can now login to admin panel.', 'success');
+        } else {
+            showToast('Registration successful!', 'success');
+        }
     } catch (error) {
         showToast(error.message, 'error');
     }

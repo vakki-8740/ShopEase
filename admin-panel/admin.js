@@ -55,7 +55,15 @@ async function adminLogin(e) {
         await auth.signInWithEmailAndPassword(email, pass);
         // Auth state listener will handle the rest
     } catch (error) {
-        errorEl.textContent = error.message;
+        let msg = error.message;
+        if (error.code === 'auth/user-not-found') {
+            msg = 'Account not found. Please register on the store first.';
+        } else if (error.code === 'auth/wrong-password') {
+            msg = 'Wrong password. Try again.';
+        } else if (error.code === 'auth/invalid-credential') {
+            msg = 'Invalid email or password. Please register on the store first.';
+        }
+        errorEl.textContent = msg;
         errorEl.style.display = 'block';
     }
 
