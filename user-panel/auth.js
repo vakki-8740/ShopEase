@@ -4,6 +4,10 @@ let isAdmin = false;
 // Listen for auth state changes
 auth.onAuthStateChanged(async (user) => {
     currentUser = user;
+    // Set user in cart.js for buyNow
+    if (typeof setCurrentUser === 'function') {
+        setCurrentUser(user);
+    }
     if (user) {
         document.getElementById('authLink').innerHTML = '<i class="fas fa-user"></i> ' + (user.displayName || user.email.split('@')[0]);
         document.getElementById('authLink').onclick = null;
@@ -22,9 +26,6 @@ auth.onAuthStateChanged(async (user) => {
                 document.getElementById('adminLink').style.display = 'inline';
             }
         }
-
-        // Load cart from Firestore
-        loadCartFromFirestore();
     } else {
         isAdmin = false;
         document.getElementById('authLink').innerHTML = '<i class="fas fa-user"></i> Login';

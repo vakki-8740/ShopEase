@@ -20,7 +20,6 @@
         <div class="nav-links">
             <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
             <a href="#" id="authLink" onclick="openAuthModal()"><i class="fas fa-user"></i> Login</a>
-            <a href="#" id="cartLink" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Cart <span id="cartCount" class="cart-count">0</span></a>
             <a href="#" id="ordersLink" style="display:none;" onclick="showMyOrders()"><i class="fas fa-box"></i> Orders</a>
             <a href="../admin-panel/" id="adminLink" style="display:none;"><i class="fas fa-shield-alt"></i> Admin</a>
             <a href="#" id="logoutBtn" style="display:none;" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -84,25 +83,6 @@
         </div>
     </div>
 </section>
-
-<!-- Cart Sidebar -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-        <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
-        <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cartItems">
-        <p class="empty-cart">Your cart is empty</p>
-    </div>
-    <div class="cart-footer" id="cartFooter" style="display:none;">
-        <div class="cart-total">
-            <span>Total:</span>
-            <span id="cartTotal">₹0</span>
-        </div>
-        <button class="btn-primary" onclick="checkout()" style="width:100%">Proceed to Checkout</button>
-    </div>
-</div>
 
 <!-- Auth Modal -->
 <div class="modal-overlay" id="authModal">
