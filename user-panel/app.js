@@ -86,6 +86,9 @@ function renderProducts(products) {
                         <button class="btn-add-cart" onclick='addToCart("${p.id}", ${JSON.stringify({ name: p.name, price: p.price, icon: p.icon })})'>
                             <i class="fas fa-cart-plus"></i> Add to Cart
                         </button>
+                        <button class="btn-buy-now" onclick='buyNow("${p.id}", ${JSON.stringify({ name: p.name, price: p.price, icon: p.icon })})'>
+                            <i class="fas fa-bolt"></i> Buy Now
+                        </button>
                     </div>
                 </div>
             </div>

@@ -43,6 +43,27 @@ function addToCart(productId, product) {
     showToast(`${product.name} added to cart!`, 'success');
 }
 
+function buyNow(productId, product) {
+    // Add to cart
+    const existing = cart.find(item => item.id === productId);
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({
+            id: productId,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            icon: product.icon,
+            qty: 1
+        });
+    }
+    saveCart();
+    renderCart();
+    // Open cart directly for checkout
+    toggleCart();
+}
+
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     saveCart();
