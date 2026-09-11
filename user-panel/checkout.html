@@ -25,16 +25,8 @@
             padding: 20px 0;
         }
 
-        .payment-header h1 {
-            font-size: 1.5rem;
-            color: #2d3436;
-        }
-
-        .payment-header p {
-            color: #636e72;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
+        .payment-header h1 { font-size: 1.5rem; color: #2d3436; }
+        .payment-header p { color: #636e72; font-size: 0.9rem; margin-top: 5px; }
 
         .qr-section {
             background: white;
@@ -45,18 +37,8 @@
             margin: 20px 0;
         }
 
-        .qr-section h2 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #2d3436;
-        }
-
-        .qr-section .amount {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #6c5ce7;
-            margin-bottom: 20px;
-        }
+        .qr-section h2 { font-size: 1.1rem; margin-bottom: 8px; color: #2d3436; }
+        .qr-section .amount { font-size: 2rem; font-weight: 800; color: #6c5ce7; margin-bottom: 20px; }
 
         #qrcode {
             display: inline-block;
@@ -67,16 +49,8 @@
             margin-bottom: 15px;
         }
 
-        #qrcode img {
-            display: block;
-        }
-
-        .upi-id {
-            font-size: 0.85rem;
-            color: #636e72;
-            margin-top: 10px;
-            word-break: break-all;
-        }
+        #qrcode img { display: block; }
+        .upi-id { font-size: 0.85rem; color: #636e72; margin-top: 10px; word-break: break-all; }
 
         .timer-section {
             background: white;
@@ -87,11 +61,7 @@
             margin-bottom: 20px;
         }
 
-        .timer-section h3 {
-            font-size: 0.95rem;
-            color: #636e72;
-            margin-bottom: 12px;
-        }
+        .timer-section h3 { font-size: 0.95rem; color: #636e72; margin-bottom: 12px; }
 
         .timer {
             font-size: 2.5rem;
@@ -100,20 +70,10 @@
             font-variant-numeric: tabular-nums;
         }
 
-        .timer.warning {
-            color: #e17055;
-            animation: pulse 1s infinite;
-        }
+        .timer.warning { color: #e17055; animation: pulse 1s infinite; }
+        .timer.danger { color: #d63031; animation: pulse 0.5s infinite; }
 
-        .timer.danger {
-            color: #d63031;
-            animation: pulse 0.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         .timer-progress {
             width: 100%;
@@ -124,12 +84,7 @@
             overflow: hidden;
         }
 
-        .timer-progress-bar {
-            height: 100%;
-            background: #6c5ce7;
-            border-radius: 3px;
-            transition: width 1s linear;
-        }
+        .timer-progress-bar { height: 100%; background: #6c5ce7; border-radius: 3px; transition: width 1s linear; }
 
         .instructions {
             background: white;
@@ -139,22 +94,9 @@
             margin-bottom: 20px;
         }
 
-        .instructions h3 {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            color: #2d3436;
-        }
-
-        .instructions ol {
-            padding-left: 20px;
-            color: #636e72;
-            font-size: 0.9rem;
-        }
-
-        .instructions li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
+        .instructions h3 { font-size: 1rem; margin-bottom: 12px; color: #2d3436; }
+        .instructions ol { padding-left: 20px; color: #636e72; font-size: 0.9rem; }
+        .instructions li { margin-bottom: 8px; line-height: 1.5; }
 
         .order-summary {
             background: white;
@@ -164,11 +106,7 @@
             margin-bottom: 20px;
         }
 
-        .order-summary h3 {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            color: #2d3436;
-        }
+        .order-summary h3 { font-size: 1rem; margin-bottom: 12px; color: #2d3436; }
 
         .order-item {
             display: flex;
@@ -200,16 +138,8 @@
             margin-bottom: 15px;
         }
 
-        .check-payment-btn:hover {
-            background: #00a884;
-            transform: translateY(-2px);
-        }
-
-        .check-payment-btn:disabled {
-            background: #b2bec3;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .check-payment-btn:hover { background: #00a884; transform: translateY(-2px); }
+        .check-payment-btn:disabled { background: #b2bec3; cursor: not-allowed; transform: none; }
 
         .back-btn {
             width: 100%;
@@ -224,18 +154,16 @@
             transition: all 0.3s;
         }
 
-        .back-btn:hover {
-            border-color: #6c5ce7;
-            color: #6c5ce7;
-        }
+        .back-btn:hover { border-color: #6c5ce7; color: #6c5ce7; }
+
+        /* PayU Form Hidden */
+        #payuForm { display: none; }
 
         /* Success Popup */
         .success-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.7);
             display: none;
             align-items: center;
@@ -244,9 +172,7 @@
             animation: fadeIn 0.3s;
         }
 
-        .success-overlay.show {
-            display: flex;
-        }
+        .success-overlay.show { display: flex; }
 
         .success-popup {
             background: white;
@@ -259,8 +185,7 @@
         }
 
         .success-icon {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             background: #00b894;
             border-radius: 50%;
             display: flex;
@@ -269,42 +194,17 @@
             margin: 0 auto 20px;
         }
 
-        .success-icon i {
-            font-size: 2.5rem;
-            color: white;
-        }
+        .success-icon i { font-size: 2.5rem; color: white; }
+        .success-popup h2 { font-size: 1.5rem; margin-bottom: 10px; color: #2d3436; }
+        .success-popup p { color: #636e72; margin-bottom: 20px; }
+        .success-popup .redirect-text { font-size: 0.85rem; color: #b2bec3; }
 
-        .success-popup h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #2d3436;
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        .success-popup p {
-            color: #636e72;
-            margin-bottom: 20px;
-        }
-
-        .success-popup .redirect-text {
-            font-size: 0.85rem;
-            color: #b2bec3;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* Loading spinner */
         .spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
@@ -313,9 +213,33 @@
             vertical-align: middle;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .payment-methods {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
         }
+
+        .payment-methods h3 { font-size: 1rem; margin-bottom: 12px; color: #2d3436; }
+
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .pay-btn:hover { background: #5a4bd1; transform: translateY(-2px); }
 
         @media (max-width: 480px) {
             .payment-page { padding: 15px; }
@@ -329,7 +253,7 @@
 <div class="payment-page">
     <div class="payment-header">
         <h1><i class="fas fa-shield-alt" style="color:#6c5ce7;"></i> Secure Payment</h1>
-        <p>Scan QR code to complete payment</p>
+        <p>Scan QR code or pay via UPI</p>
     </div>
 
     <!-- Order Summary -->
@@ -347,8 +271,8 @@
         <h2>Scan QR Code to Pay</h2>
         <div class="amount" id="qrAmount">₹0</div>
         <div id="qrcode"></div>
-        <p class="upi-id">UPI ID: shopadmin@ybl</p>
-        <p style="font-size:0.8rem;color:#636e72;margin-top:8px;">Or use UPI App</p>
+        <p class="upi-id">UPI ID: 8690473929@ybl</p>
+        <p style="font-size:0.8rem;color:#636e72;margin-top:8px;">PhonePe / GPay / Paytm se scan karein</p>
     </div>
 
     <!-- Timer Section -->
@@ -364,22 +288,37 @@
     <div class="instructions">
         <h3><i class="fas fa-info-circle"></i> How to Pay</h3>
         <ol>
-            <li>Open any UPI app (Google Pay, PhonePe, Paytm)</li>
-            <li>Scan the QR code above</li>
-            <li>Enter the exact amount shown</li>
-            <li>Complete the payment</li>
-            <li>Click "I've Paid" button below</li>
+            <li>Apna UPI app kholein (PhonePe, GPay, Paytm)</li>
+            <li>QR code scan karein ya UPI ID copy karein</li>
+            <li>Sahi amount enter karein</li>
+            <li>Payment complete karein</li>
+            <li>Neeche "I've Paid" button dabayein</li>
         </ol>
     </div>
 
     <!-- Buttons -->
-    <button class="check-payment-btn" id="checkPaymentBtn" onclick="checkPayment()">
+    <button class="check-payment-btn" id="checkPaymentBtn" onclick="verifyPayment()">
         <i class="fas fa-check-circle"></i> I've Paid - Check Status
     </button>
     <button class="back-btn" onclick="goBack()">
         <i class="fas fa-arrow-left"></i> Cancel & Go Back
     </button>
 </div>
+
+<!-- PayU Form (Hidden - for actual payment) -->
+<form id="payuForm" method="POST" action="https://sandboxsecure.payu.in/_payment">
+    <input type="hidden" name="key" id="payuKey">
+    <input type="hidden" name="txnid" id="payuTxnid">
+    <input type="hidden" name="amount" id="payuAmount">
+    <input type="hidden" name="productinfo" id="payuProductinfo">
+    <input type="hidden" name="firstname" id="payuFirstname">
+    <input type="hidden" name="email" id="payuEmail">
+    <input type="hidden" name="phone" id="payuPhone">
+    <input type="hidden" name="surl" id="payuSurl">
+    <input type="hidden" name="furl" id="payuFurl">
+    <input type="hidden" name="hash" id="payuHash">
+    <input type="hidden" name="udf1" id="payuUdf1">
+</form>
 
 <!-- Success Popup -->
 <div class="success-overlay" id="successOverlay">
@@ -393,11 +332,25 @@
     </div>
 </div>
 
+<!-- Failed Popup -->
+<div class="success-overlay" id="failedOverlay">
+    <div class="success-popup">
+        <div class="success-icon" style="background:#d63031;">
+            <i class="fas fa-times"></i>
+        </div>
+        <h2>Payment Failed!</h2>
+        <p>Payment was not completed. Please try again.</p>
+        <button onclick="goBack()" style="padding:12px 30px;background:#6c5ce7;color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:10px;">
+            Try Again
+        </button>
+    </div>
+</div>
+
 <!-- Expired Popup -->
 <div class="success-overlay" id="expiredOverlay">
     <div class="success-popup">
         <div class="success-icon" style="background:#d63031;">
-            <i class="fas fa-times"></i>
+            <i class="fas fa-clock"></i>
         </div>
         <h2>Time Expired!</h2>
         <p>Payment time has expired. Please try again.</p>
@@ -408,19 +361,25 @@
 </div>
 
 <script>
-    // Get order data from URL params or localStorage
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('order_id');
+    // PayU Configuration
+    const PAYU_CONFIG = {
+        key: 'SkDGA0',
+        salt: 'q3t0z8uAUX3ZEv4ecMWmjRxmOBwUKqjc',
+        mid: '13764891',
+        testUrl: 'https://sandboxsecure.payu.in/_payment',
+        prodUrl: 'https://secure.payu.in/_payment'
+    };
 
+    // Get order data
     let orderData = JSON.parse(localStorage.getItem('pendingOrder'));
     let totalAmount = 0;
     let timerInterval;
-    let totalTime = 600; // 10 minutes in seconds
+    let totalTime = 600; // 10 minutes
 
-    // Initialize page
+    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         if (!orderData) {
-            alert('No order found. Please go back and try again.');
+            alert('No order found!');
             window.location.href = '/';
             return;
         }
@@ -438,7 +397,7 @@
         document.getElementById('totalAmount').textContent = '₹' + totalAmount.toLocaleString();
         document.getElementById('qrAmount').textContent = '₹' + totalAmount.toLocaleString();
 
-        // Generate UPI QR Code
+        // Generate QR Code
         generateQR();
 
         // Start timer
@@ -446,9 +405,9 @@
     });
 
     function generateQR() {
-        const upiId = 'shopadmin@ybl';
+        const upiId = '8690473929@ybl';
         const name = 'ShopEase';
-        const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${totalAmount}&cu=INR&tn=OrderPayment`;
+        const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${totalAmount}&cu=INR&tn=PaymentForOrder`;
 
         new QRCode(document.getElementById('qrcode'), {
             text: upiUrl,
@@ -463,27 +422,20 @@
     function startTimer() {
         timerInterval = setInterval(() => {
             totalTime--;
-
             const minutes = Math.floor(totalTime / 60);
             const seconds = totalTime % 60;
-            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            document.getElementById('timer').textContent = display;
-
-            // Progress bar
             const progress = (totalTime / 600) * 100;
             document.getElementById('timerBar').style.width = progress + '%';
 
-            // Color changes
-            const timerEl = document.getElementById('timer');
-            const barEl = document.getElementById('timerBar');
-
             if (totalTime <= 120) {
-                timerEl.className = 'timer danger';
-                barEl.style.background = '#d63031';
+                document.getElementById('timer').className = 'timer danger';
+                document.getElementById('timerBar').style.background = '#d63031';
             } else if (totalTime <= 300) {
-                timerEl.className = 'timer warning';
-                barEl.style.background = '#e17055';
+                document.getElementById('timer').className = 'timer warning';
+                document.getElementById('timerBar').style.background = '#e17055';
             }
 
             if (totalTime <= 0) {
@@ -493,27 +445,97 @@
         }, 1000);
     }
 
-    function checkPayment() {
+    // Generate unique transaction ID
+    function generateTxnId() {
+        return 'txn_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Initialize PayU payment
+    async function initPayUPayment() {
+        const txnid = generateTxnId();
+        const productinfo = orderData.items.map(i => i.name).join(', ');
+        const firstname = orderData.userName || 'Guest';
+        const email = orderData.userEmail || 'test@test.com';
+        const phone = '9999999999';
+        const surl = window.location.origin + '/checkout.html?status=success&txnid=' + txnid;
+        const furl = window.location.origin + '/checkout.html?status=failed&txnid=' + txnid;
+
+        try {
+            // Get hash from API
+            const response = await fetch('/api/create-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    key: PAYU_CONFIG.key,
+                    salt: PAYU_CONFIG.salt,
+                    txnid: txnid,
+                    amount: totalAmount,
+                    productinfo: productinfo,
+                    firstname: firstname,
+                    email: email,
+                    phone: phone,
+                    surl: surl,
+                    furl: furl,
+                    udf1: orderData.userId || 'guest'
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Set form values
+                document.getElementById('payuKey').value = PAYU_CONFIG.key;
+                document.getElementById('payuTxnid').value = txnid;
+                document.getElementById('payuAmount').value = totalAmount;
+                document.getElementById('payuProductinfo').value = productinfo;
+                document.getElementById('payuFirstname').value = firstname;
+                document.getElementById('payuEmail').value = email;
+                document.getElementById('payuPhone').value = phone;
+                document.getElementById('payuSurl').value = surl;
+                document.getElementById('payuFurl').value = furl;
+                document.getElementById('payuHash').value = data.hash;
+                document.getElementById('payuUdf1').value = orderData.userId || 'guest';
+
+                // Submit to PayU
+                document.getElementById('payuForm').submit();
+            } else {
+                alert('Error creating payment. Please try again.');
+            }
+        } catch (error) {
+            console.error('Payment init error:', error);
+            alert('Error connecting to payment gateway. Please try again.');
+        }
+    }
+
+    // Verify payment (manual check)
+    function verifyPayment() {
         const btn = document.getElementById('checkPaymentBtn');
         btn.innerHTML = '<span class="spinner"></span> Checking payment...';
         btn.disabled = true;
 
-        // Simulate payment check (in real app, call your API)
-        setTimeout(() => {
-            // For demo - show success
-            // In production, verify with PayU API
+        // Check URL params for PayU callback
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const txnid = urlParams.get('txnid');
+
+        if (status === 'success' && txnid) {
+            // Payment was successful via PayU
             showSuccess();
-        }, 2000);
+        } else {
+            // Manual verification - check after delay
+            setTimeout(() => {
+                // For demo, show success
+                // In production, verify with your backend
+                showSuccess();
+            }, 2000);
+        }
     }
 
     function showSuccess() {
         clearInterval(timerInterval);
         document.getElementById('successOverlay').classList.add('show');
-
-        // Save order to Firestore
         saveOrder();
 
-        // Countdown redirect
         let count = 5;
         const countdownEl = document.getElementById('redirectCountdown');
         const countdownInterval = setInterval(() => {
@@ -522,6 +544,7 @@
             if (count <= 0) {
                 clearInterval(countdownInterval);
                 localStorage.removeItem('pendingOrder');
+                localStorage.removeItem('cart');
                 window.location.href = '/';
             }
         }, 1000);
@@ -529,12 +552,10 @@
 
     async function saveOrder() {
         if (!orderData) return;
-
         try {
-            // Save to Firestore
             await db.collection('orders').add({
                 userId: orderData.userId || 'guest',
-                userName: orderData.userName || 'Guest User',
+                userName: orderData.userName || 'Guest',
                 userEmail: orderData.userEmail || '',
                 items: orderData.items,
                 total: orderData.total,
@@ -542,9 +563,6 @@
                 paymentMethod: 'UPI',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-
-            // Clear cart
-            localStorage.removeItem('cart');
         } catch (e) {
             console.log('Order save error:', e);
         }
@@ -554,9 +572,20 @@
         clearInterval(timerInterval);
         window.location.href = '/';
     }
+
+    // Check if returning from PayU
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        if (status === 'success') {
+            showSuccess();
+        } else if (status === 'failed') {
+            document.getElementById('failedOverlay').classList.add('show');
+        }
+    };
 </script>
 
-<!-- Firebase for order save -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
