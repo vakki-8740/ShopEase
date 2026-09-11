@@ -60,8 +60,8 @@ function buyNow(productId, product) {
     }
     saveCart();
     renderCart();
-    // Open cart directly for checkout
-    toggleCart();
+    // Go directly to checkout
+    goToCheckout();
 }
 
 function removeFromCart(productId) {
@@ -141,43 +141,29 @@ function toggleMobileMenu() {
 }
 
 async function checkout() {
-    if (!currentUser) {
-        showToast('Please login to checkout', 'error');
-        toggleCart();
-        openAuthModal();
+    if (cart.length === 0) return;
+    goToCheckout();
+}
+
+function goToCheckout() {
+    if (cart.length === 0) {
+        showToast('Your cart is empty!', 'error');
         return;
     }
 
-    if (cart.length === 0) return;
-
     const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-    // Create order in Firestore
-    try {
-        const orderData = {
-            userId: currentUser.uid,
-            userName: currentUser.displayName || currentUser.email,
-            userEmail: currentUser.email,
-            items: [...cart],
-            total: total,
-            status: 'pending',
-            address: '',
-            phone: '',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
+    // Save order data to localStorage for checkout page
+    const orderData = {
+        items: [...cart],
+        total: total,
+        userId: currentUser ? currentUser.uid : 'guest',
+        userName: currentUser ? (currentUser.displayName || currentUser.email) : 'Guest User',
+        userEmail: currentUser ? currentUser.email : ''
+    };
 
-        await db.collection('orders').add(orderData);
-
-        // Clear cart
-        cart = [];
-        saveCart();
-        renderCart();
-        toggleCart();
-
-        showToast('Order placed successfully! We will contact you soon.', 'success');
-    } catch (error) {
-        showToast('Error placing order: ' + error.message, 'error');
-    }
+    localStorage.setItem('pendingOrder', JSON.stringify(orderData));
+    window.location.href = 'checkout.html';
 }
 
 async function showMyOrders() {
