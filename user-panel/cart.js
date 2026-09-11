@@ -163,7 +163,7 @@ function goToCheckout() {
     };
 
     localStorage.setItem('pendingOrder', JSON.stringify(orderData));
-    window.location.href = window.location.pathname.replace('index.html', '') + 'checkout.html';
+    window.location.href = 'checkout.html';
 }
 
 async function showMyOrders() {
