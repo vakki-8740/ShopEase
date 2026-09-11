@@ -3,7 +3,7 @@
 // Check admin access
 auth.onAuthStateChanged(async (user) => {
     if (!user) {
-        window.location.href = '../user-panel/';
+        window.location.href = '/';
         return;
     }
 
@@ -219,7 +219,7 @@ async function updateOrderStatus(orderId, status) {
 
 async function adminLogout() {
     await auth.signOut();
-    window.location.href = '../user-panel/';
+    window.location.href = '/';
 }
 
 function showToast(message, type = '') {
