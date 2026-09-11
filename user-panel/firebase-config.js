@@ -15,4 +15,4 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 
 // Admin email - change this to your email
-const ADMIN_EMAIL = "admin@shopease.com";
+const ADMIN_EMAIL = "shopadmin@gmail.com";
