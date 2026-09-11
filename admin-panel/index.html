@@ -10,58 +10,24 @@
 </head>
 <body>
 
-<!-- Admin Login -->
-<div id="adminLogin" class="admin-login-wrapper">
-    <div class="admin-login-card">
-        <div class="admin-login-header">
-            <i class="fas fa-user-shield"></i>
-            <h1>ShopEase <span>Admin</span></h1>
-            <p>Login to access admin panel</p>
-        </div>
-        <form onsubmit="adminLogin(event)">
-            <div class="form-group">
-                <label><i class="fas fa-envelope"></i> Email</label>
-                <input type="email" id="adminEmail" required placeholder="Enter admin email">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="adminPass" required placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn-admin-login" id="adminLoginBtn">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-            <p id="loginError" style="color:red;text-align:center;margin-top:10px;display:none;"></p>
-        </form>
-    </div>
-</div>
-
-<!-- Admin Access Denied -->
-<div id="accessDenied" style="display:none;text-align:center;padding:80px 20px;">
-    <i class="fas fa-lock" style="font-size:4rem;color:#d63031;margin-bottom:20px;"></i>
-    <h2>Access Denied</h2>
-    <p style="color:#636e72;">You don't have admin access.</p>
-    <button onclick="adminLogout()" class="btn-admin-login" style="margin-top:20px;">Try Another Account</button>
-</div>
-
 <!-- Admin Navbar -->
-<nav class="navbar" id="adminNavbar" style="display:none;">
+<nav class="navbar">
     <div class="nav-container">
         <a href="/" class="logo">Shop<span>Ease</span> <small style="font-size:0.7rem;color:#636e72;">Admin</small></a>
         <div class="nav-links">
             <a href="/"><i class="fas fa-store"></i> View Store</a>
-            <a href="#" id="adminLogoutBtn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
     </div>
 </nav>
 
 <!-- Admin Content -->
-<div id="adminContent" style="display:none;">
+<div id="adminContent">
     <div class="admin-container">
         <!-- Sidebar -->
         <aside class="admin-sidebar">
             <div class="admin-user">
                 <i class="fas fa-user-shield"></i>
-                <span id="adminName">Admin</span>
+                <span>Admin Panel</span>
             </div>
             <ul class="admin-menu">
                 <li class="active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</li>

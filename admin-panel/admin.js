@@ -1,80 +1,9 @@
-// Admin panel JavaScript - Standalone
+// Admin panel JavaScript - Direct access, no login
 
-const ADMIN_EMAIL = "shopadmin@gmail.com";
-const ADMIN_PASS = "shopadmin123";
-
-// Check if user is already logged in
-auth.onAuthStateChanged(async (user) => {
-    if (user) {
-        // Check if admin
-        if (user.email === ADMIN_EMAIL) {
-            showAdminPanel(user);
-        } else {
-            showAccessDenied();
-        }
-    } else {
-        showLoginForm();
-    }
-});
-
-function showLoginForm() {
-    document.getElementById('adminLogin').style.display = 'flex';
-    document.getElementById('adminNavbar').style.display = 'none';
-    document.getElementById('adminContent').style.display = 'none';
-    document.getElementById('accessDenied').style.display = 'none';
-}
-
-function showAdminPanel(user) {
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminNavbar').style.display = 'block';
-    document.getElementById('adminContent').style.display = 'block';
-    document.getElementById('accessDenied').style.display = 'none';
-    document.getElementById('adminName').textContent = user.displayName || user.email;
+// Load dashboard on page load
+document.addEventListener('DOMContentLoaded', () => {
     loadDashboard();
-}
-
-function showAccessDenied() {
-    document.getElementById('adminLogin').style.display = 'none';
-    document.getElementById('adminNavbar').style.display = 'none';
-    document.getElementById('adminContent').style.display = 'none';
-    document.getElementById('accessDenied').style.display = 'block';
-}
-
-async function adminLogin(e) {
-    e.preventDefault();
-    const email = document.getElementById('adminEmail').value;
-    const pass = document.getElementById('adminPass').value;
-    const btn = document.getElementById('adminLoginBtn');
-    const errorEl = document.getElementById('loginError');
-
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-    btn.disabled = true;
-    errorEl.style.display = 'none';
-
-    try {
-        await auth.signInWithEmailAndPassword(email, pass);
-        // Auth state listener will handle the rest
-    } catch (error) {
-        let msg = error.message;
-        if (error.code === 'auth/user-not-found') {
-            msg = 'Account not found. Please register on the store first.';
-        } else if (error.code === 'auth/wrong-password') {
-            msg = 'Wrong password. Try again.';
-        } else if (error.code === 'auth/invalid-credential') {
-            msg = 'Invalid email or password. Please register on the store first.';
-        }
-        errorEl.textContent = msg;
-        errorEl.style.display = 'block';
-    }
-
-    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-    btn.disabled = false;
-}
-
-async function adminLogout() {
-    await auth.signOut();
-    showLoginForm();
-}
+});
 
 function showSection(section) {
     document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
