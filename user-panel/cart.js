@@ -7,6 +7,16 @@ function setCurrentUser(user) {
     currentUser = user;
 }
 
+// Called from button click - reads data attributes
+function buyFromBtn(btn) {
+    const id = btn.getAttribute('data-id');
+    const name = btn.getAttribute('data-name');
+    const price = parseInt(btn.getAttribute('data-price'));
+    const icon = btn.getAttribute('data-icon');
+
+    buyNow(id, { name: name, price: price, icon: icon });
+}
+
 function buyNow(productId, product) {
     const orderData = {
         items: [{
@@ -32,5 +42,6 @@ function toggleMobileMenu() {
 
 // Make functions globally accessible
 window.buyNow = buyNow;
+window.buyFromBtn = buyFromBtn;
 window.toggleMobileMenu = toggleMobileMenu;
 window.setCurrentUser = setCurrentUser;

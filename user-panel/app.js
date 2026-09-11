@@ -71,6 +71,7 @@ function renderProducts(products) {
     let html = '';
     products.forEach(p => {
         const discount = p.oldPrice ? Math.round((1 - p.price / p.oldPrice) * 100) : 0;
+        const productName = p.name.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         html += `
             <div class="product-card" data-category="${p.category}">
                 <div class="product-image">${p.icon || '📦'}</div>
@@ -83,7 +84,7 @@ function renderProducts(products) {
                         ${p.oldPrice ? `<span class="price-old">₹${p.oldPrice.toLocaleString()}</span>` : ''}
                     </div>
                     <div class="product-actions">
-                        <button class="btn-buy-now" onclick='buyNow("${p.id}", {name: "${p.name.replace(/'/g, "\\'")}", price: ${p.price}, icon: "${p.icon || '📦'}"})'>
+                        <button class="btn-buy-now" data-id="${p.id}" data-name="${productName}" data-price="${p.price}" data-icon="${p.icon || '📦'}" onclick="buyFromBtn(this)">
                             <i class="fas fa-bolt"></i> Buy Now
                         </button>
                     </div>
@@ -145,5 +146,4 @@ function showToast(message, type = '') {
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
-    renderCart();
 });
