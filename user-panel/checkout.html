@@ -6,7 +6,6 @@
     <title>Payment - ShopEase</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; min-height: 100vh; }
@@ -20,83 +19,9 @@
             flex-direction: column;
         }
 
-        .payment-header {
-            text-align: center;
-            padding: 20px 0;
-        }
-
+        .payment-header { text-align: center; padding: 20px 0; }
         .payment-header h1 { font-size: 1.5rem; color: #2d3436; }
         .payment-header p { color: #636e72; font-size: 0.9rem; margin-top: 5px; }
-
-        .qr-section {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin: 20px 0;
-        }
-
-        .qr-section h2 { font-size: 1.1rem; margin-bottom: 8px; color: #2d3436; }
-        .qr-section .amount { font-size: 2rem; font-weight: 800; color: #6c5ce7; margin-bottom: 20px; }
-
-        #qrcode {
-            display: inline-block;
-            padding: 15px;
-            background: white;
-            border: 2px solid #dfe6e9;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        #qrcode img { display: block; }
-        .upi-id { font-size: 0.85rem; color: #636e72; margin-top: 10px; word-break: break-all; }
-
-        .timer-section {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        .timer-section h3 { font-size: 0.95rem; color: #636e72; margin-bottom: 12px; }
-
-        .timer {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #d63031;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .timer.warning { color: #e17055; animation: pulse 1s infinite; }
-        .timer.danger { color: #d63031; animation: pulse 0.5s infinite; }
-
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-        .timer-progress {
-            width: 100%;
-            height: 6px;
-            background: #dfe6e9;
-            border-radius: 3px;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-
-        .timer-progress-bar { height: 100%; background: #6c5ce7; border-radius: 3px; transition: width 1s linear; }
-
-        .instructions {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        .instructions h3 { font-size: 1rem; margin-bottom: 12px; color: #2d3436; }
-        .instructions ol { padding-left: 20px; color: #636e72; font-size: 0.9rem; }
-        .instructions li { margin-bottom: 8px; line-height: 1.5; }
 
         .order-summary {
             background: white;
@@ -124,22 +49,58 @@
             margin-top: 8px;
         }
 
-        .check-payment-btn {
+        .pay-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .pay-section h2 { font-size: 1.2rem; margin-bottom: 10px; color: #2d3436; }
+        .pay-section .amount { font-size: 2.5rem; font-weight: 800; color: #6c5ce7; margin-bottom: 20px; }
+
+        .pay-section p { color: #636e72; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
+
+        .pay-now-btn {
             width: 100%;
-            padding: 16px;
-            background: #00b894;
+            padding: 18px;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .check-payment-btn:hover { background: #00a884; transform: translateY(-2px); }
-        .check-payment-btn:disabled { background: #b2bec3; cursor: not-allowed; transform: none; }
+        .pay-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
+        }
+
+        .pay-now-btn:disabled {
+            background: #b2bec3;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            color: #00b894;
+            font-size: 0.85rem;
+        }
 
         .back-btn {
             width: 100%;
@@ -156,7 +117,7 @@
 
         .back-btn:hover { border-color: #6c5ce7; color: #6c5ce7; }
 
-        /* PayU Form Hidden */
+        /* PayU Form */
         #payuForm { display: none; }
 
         /* Success Popup */
@@ -164,7 +125,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             display: none;
             align-items: center;
             justify-content: center;
@@ -176,75 +137,119 @@
 
         .success-popup {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 24px;
+            padding: 50px 40px;
             text-align: center;
-            max-width: 350px;
+            max-width: 380px;
             width: 90%;
-            animation: scaleIn 0.4s;
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .success-icon {
-            width: 80px; height: 80px;
-            background: #00b894;
+            width: 100px; height: 100px;
+            background: linear-gradient(135deg, #00b894, #55efc4);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
+            animation: bounceIn 0.6s;
         }
 
-        .success-icon i { font-size: 2.5rem; color: white; }
-        .success-popup h2 { font-size: 1.5rem; margin-bottom: 10px; color: #2d3436; }
-        .success-popup p { color: #636e72; margin-bottom: 20px; }
-        .success-popup .redirect-text { font-size: 0.85rem; color: #b2bec3; }
+        .success-icon i { font-size: 3rem; color: white; }
+        .success-popup h2 { font-size: 1.8rem; margin-bottom: 12px; color: #2d3436; }
+        .success-popup p { color: #636e72; margin-bottom: 8px; font-size: 1rem; }
+        .success-popup .redirect-text { font-size: 0.9rem; color: #b2bec3; margin-top: 20px; }
+
+        .checkmark {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #00b894;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #00b894;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes bounceIn { 0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
         .spinner {
             display: inline-block;
-            width: 20px; height: 20px;
+            width: 24px; height: 24px;
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
             animation: spin 0.8s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .payment-methods {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
+        /* Failed Popup */
+        .failed-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
 
-        .payment-methods h3 { font-size: 1rem; margin-bottom: 12px; color: #2d3436; }
+        .failed-overlay.show { display: flex; }
 
-        .pay-btn {
-            width: 100%;
-            padding: 16px;
+        .failed-icon {
+            width: 100px; height: 100px;
+            background: linear-gradient(135deg, #d63031, #ff7675);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+
+        .failed-icon i { font-size: 3rem; color: white; }
+
+        .retry-btn {
+            padding: 14px 40px;
             background: #6c5ce7;
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 15px;
+            margin-top: 15px;
         }
-
-        .pay-btn:hover { background: #5a4bd1; transform: translateY(-2px); }
 
         @media (max-width: 480px) {
             .payment-page { padding: 15px; }
-            .qr-section { padding: 20px; }
-            .timer { font-size: 2rem; }
+            .pay-section { padding: 20px; }
+            .pay-section .amount { font-size: 2rem; }
         }
     </style>
 </head>
@@ -252,8 +257,8 @@
 
 <div class="payment-page">
     <div class="payment-header">
-        <h1><i class="fas fa-shield-alt" style="color:#6c5ce7;"></i> Secure Payment</h1>
-        <p>Scan QR code or pay via UPI</p>
+        <h1><i class="fas fa-lock" style="color:#00b894;"></i> Secure Checkout</h1>
+        <p>Complete your payment securely via PayU</p>
     </div>
 
     <!-- Order Summary -->
@@ -266,46 +271,25 @@
         </div>
     </div>
 
-    <!-- QR Code Section -->
-    <div class="qr-section">
-        <h2>Scan QR Code to Pay</h2>
-        <div class="amount" id="qrAmount">₹0</div>
-        <div id="qrcode"></div>
-        <p class="upi-id">UPI ID: 8690473929@ybl</p>
-        <p style="font-size:0.8rem;color:#636e72;margin-top:8px;">PhonePe / GPay / Paytm se scan karein</p>
-    </div>
-
-    <!-- Timer Section -->
-    <div class="timer-section">
-        <h3><i class="fas fa-clock"></i> Payment Time Remaining</h3>
-        <div class="timer" id="timer">10:00</div>
-        <div class="timer-progress">
-            <div class="timer-progress-bar" id="timerBar" style="width:100%"></div>
+    <!-- Pay Section -->
+    <div class="pay-section">
+        <h2>Complete Payment</h2>
+        <div class="amount" id="payAmount">₹0</div>
+        <p>Click below to pay securely via PayU.<br>Supports UPI, Cards, Net Banking & Wallets.</p>
+        <button class="pay-now-btn" id="payBtn" onclick="initPayment()">
+            <i class="fas fa-shield-alt"></i> Pay Now via PayU
+        </button>
+        <div class="secure-badge">
+            <i class="fas fa-lock"></i> 100% Secure Payment by PayU
         </div>
     </div>
 
-    <!-- Instructions -->
-    <div class="instructions">
-        <h3><i class="fas fa-info-circle"></i> How to Pay</h3>
-        <ol>
-            <li>Apna UPI app kholein (PhonePe, GPay, Paytm)</li>
-            <li>QR code scan karein ya UPI ID copy karein</li>
-            <li>Sahi amount enter karein</li>
-            <li>Payment complete karein</li>
-            <li>Neeche "I've Paid" button dabayein</li>
-        </ol>
-    </div>
-
-    <!-- Buttons -->
-    <button class="check-payment-btn" id="checkPaymentBtn" onclick="verifyPayment()">
-        <i class="fas fa-check-circle"></i> I've Paid - Check Status
-    </button>
     <button class="back-btn" onclick="goBack()">
         <i class="fas fa-arrow-left"></i> Cancel & Go Back
     </button>
 </div>
 
-<!-- PayU Form (Hidden - for actual payment) -->
+<!-- PayU Form (Hidden) -->
 <form id="payuForm" method="POST" action="https://sandboxsecure.payu.in/_payment">
     <input type="hidden" name="key" id="payuKey">
     <input type="hidden" name="txnid" id="payuTxnid">
@@ -324,60 +308,56 @@
 <div class="success-overlay" id="successOverlay">
     <div class="success-popup">
         <div class="success-icon">
-            <i class="fas fa-check"></i>
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
         </div>
         <h2>Payment Successful!</h2>
-        <p>Thank you for your purchase. Your order has been placed.</p>
-        <p class="redirect-text">Redirecting to home page in <span id="redirectCountdown">5</span>s...</p>
+        <p>Thank you for your purchase.</p>
+        <p>Your order has been confirmed.</p>
+        <p class="redirect-text">Redirecting to home in <span id="redirectCountdown">5</span>s...</p>
     </div>
 </div>
 
 <!-- Failed Popup -->
-<div class="success-overlay" id="failedOverlay">
+<div class="failed-overlay" id="failedOverlay">
     <div class="success-popup">
-        <div class="success-icon" style="background:#d63031;">
+        <div class="failed-icon">
             <i class="fas fa-times"></i>
         </div>
-        <h2>Payment Failed!</h2>
-        <p>Payment was not completed. Please try again.</p>
-        <button onclick="goBack()" style="padding:12px 30px;background:#6c5ce7;color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:10px;">
-            Try Again
-        </button>
-    </div>
-</div>
-
-<!-- Expired Popup -->
-<div class="success-overlay" id="expiredOverlay">
-    <div class="success-popup">
-        <div class="success-icon" style="background:#d63031;">
-            <i class="fas fa-clock"></i>
-        </div>
-        <h2>Time Expired!</h2>
-        <p>Payment time has expired. Please try again.</p>
-        <button onclick="goBack()" style="padding:12px 30px;background:#6c5ce7;color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-top:10px;">
-            Go Back
-        </button>
+        <h2 style="color:#d63031;">Payment Failed!</h2>
+        <p>Your payment was not completed.</p>
+        <p>Please try again.</p>
+        <button class="retry-btn" onclick="retryPayment()">Try Again</button>
+        <br><br>
+        <button class="back-btn" onclick="goBack()" style="border-color:#d63031;color:#d63031;">Go Back</button>
     </div>
 </div>
 
 <script>
-    // PayU Configuration
-    const PAYU_CONFIG = {
-        key: 'SkDGA0',
-        salt: 'q3t0z8uAUX3ZEv4ecMWmjRxmOBwUKqjc',
-        mid: '13764891',
-        testUrl: 'https://sandboxsecure.payu.in/_payment',
-        prodUrl: 'https://secure.payu.in/_payment'
-    };
+    // PayU Config
+    const PAYU_KEY = 'SkDGA0';
+    const PAYU_SALT = 'q3t0z8uAUX3ZEv4ecMWmjRxmOBwUKqjc';
 
-    // Get order data
     let orderData = JSON.parse(localStorage.getItem('pendingOrder'));
     let totalAmount = 0;
-    let timerInterval;
-    let totalTime = 600; // 10 minutes
 
-    // Initialize
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
+        // Check if returning from PayU
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const txnid = urlParams.get('txnid');
+
+        if (status === 'success') {
+            showSuccess();
+            return;
+        } else if (status === 'failed') {
+            document.getElementById('failedOverlay').classList.add('show');
+            return;
+        }
+
         if (!orderData) {
             alert('No order found!');
             window.location.href = '/';
@@ -385,8 +365,6 @@
         }
 
         totalAmount = orderData.total;
-
-        // Display order items
         const itemsHtml = orderData.items.map(item =>
             `<div class="order-item">
                 <span>${item.name} x${item.qty}</span>
@@ -395,79 +373,36 @@
         ).join('');
         document.getElementById('orderItems').innerHTML = itemsHtml;
         document.getElementById('totalAmount').textContent = '₹' + totalAmount.toLocaleString();
-        document.getElementById('qrAmount').textContent = '₹' + totalAmount.toLocaleString();
-
-        // Generate QR Code
-        generateQR();
-
-        // Start timer
-        startTimer();
+        document.getElementById('payAmount').textContent = '₹' + totalAmount.toLocaleString();
     });
 
-    function generateQR() {
-        const upiId = '8690473929@ybl';
-        const name = 'ShopEase';
-        const upiUrl = `upi://pay?pa=${upiId}&pn=${name}&am=${totalAmount}&cu=INR&tn=PaymentForOrder`;
-
-        new QRCode(document.getElementById('qrcode'), {
-            text: upiUrl,
-            width: 200,
-            height: 200,
-            colorDark: "#2d3436",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-    }
-
-    function startTimer() {
-        timerInterval = setInterval(() => {
-            totalTime--;
-            const minutes = Math.floor(totalTime / 60);
-            const seconds = totalTime % 60;
-            document.getElementById('timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            const progress = (totalTime / 600) * 100;
-            document.getElementById('timerBar').style.width = progress + '%';
-
-            if (totalTime <= 120) {
-                document.getElementById('timer').className = 'timer danger';
-                document.getElementById('timerBar').style.background = '#d63031';
-            } else if (totalTime <= 300) {
-                document.getElementById('timer').className = 'timer warning';
-                document.getElementById('timerBar').style.background = '#e17055';
-            }
-
-            if (totalTime <= 0) {
-                clearInterval(timerInterval);
-                document.getElementById('expiredOverlay').classList.add('show');
-            }
-        }, 1000);
-    }
-
-    // Generate unique transaction ID
+    // Generate Txn ID
     function generateTxnId() {
-        return 'txn_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        return 'txn' + Date.now() + Math.random().toString(36).substr(2, 6);
     }
 
-    // Initialize PayU payment
-    async function initPayUPayment() {
+    // Init Payment - Redirect to PayU
+    async function initPayment() {
+        const btn = document.getElementById('payBtn');
+        btn.innerHTML = '<span class="spinner"></span> Redirecting to PayU...';
+        btn.disabled = true;
+
         const txnid = generateTxnId();
         const productinfo = orderData.items.map(i => i.name).join(', ');
         const firstname = orderData.userName || 'Guest';
-        const email = orderData.userEmail || 'test@test.com';
+        const email = orderData.userEmail || 'customer@example.com';
         const phone = '9999999999';
-        const surl = window.location.origin + '/checkout.html?status=success&txnid=' + txnid;
-        const furl = window.location.origin + '/checkout.html?status=failed&txnid=' + txnid;
+        const currentUrl = window.location.origin + window.location.pathname;
+        const surl = currentUrl + '?status=success&txnid=' + txnid;
+        const furl = currentUrl + '?status=failed&txnid=' + txnid;
 
         try {
-            // Get hash from API
             const response = await fetch('/api/create-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    key: PAYU_CONFIG.key,
-                    salt: PAYU_CONFIG.salt,
+                    key: PAYU_KEY,
+                    salt: PAYU_SALT,
                     txnid: txnid,
                     amount: totalAmount,
                     productinfo: productinfo,
@@ -483,8 +418,7 @@
             const data = await response.json();
 
             if (data.success) {
-                // Set form values
-                document.getElementById('payuKey').value = PAYU_CONFIG.key;
+                document.getElementById('payuKey').value = PAYU_KEY;
                 document.getElementById('payuTxnid').value = txnid;
                 document.getElementById('payuAmount').value = totalAmount;
                 document.getElementById('payuProductinfo').value = productinfo;
@@ -499,50 +433,30 @@
                 // Submit to PayU
                 document.getElementById('payuForm').submit();
             } else {
-                alert('Error creating payment. Please try again.');
+                alert('Error: ' + (data.error || 'Payment initialization failed'));
+                btn.innerHTML = '<i class="fas fa-shield-alt"></i> Pay Now via PayU';
+                btn.disabled = false;
             }
         } catch (error) {
-            console.error('Payment init error:', error);
-            alert('Error connecting to payment gateway. Please try again.');
+            console.error('Payment error:', error);
+            alert('Error connecting to payment gateway.');
+            btn.innerHTML = '<i class="fas fa-shield-alt"></i> Pay Now via PayU';
+            btn.disabled = false;
         }
     }
 
-    // Verify payment (manual check)
-    function verifyPayment() {
-        const btn = document.getElementById('checkPaymentBtn');
-        btn.innerHTML = '<span class="spinner"></span> Checking payment...';
-        btn.disabled = true;
-
-        // Check URL params for PayU callback
-        const urlParams = new URLSearchParams(window.location.search);
-        const status = urlParams.get('status');
-        const txnid = urlParams.get('txnid');
-
-        if (status === 'success' && txnid) {
-            // Payment was successful via PayU
-            showSuccess();
-        } else {
-            // Manual verification - check after delay
-            setTimeout(() => {
-                // For demo, show success
-                // In production, verify with your backend
-                showSuccess();
-            }, 2000);
-        }
-    }
-
+    // Show Success
     function showSuccess() {
-        clearInterval(timerInterval);
         document.getElementById('successOverlay').classList.add('show');
         saveOrder();
 
         let count = 5;
         const countdownEl = document.getElementById('redirectCountdown');
-        const countdownInterval = setInterval(() => {
+        const interval = setInterval(() => {
             count--;
             countdownEl.textContent = count;
             if (count <= 0) {
-                clearInterval(countdownInterval);
+                clearInterval(interval);
                 localStorage.removeItem('pendingOrder');
                 localStorage.removeItem('cart');
                 window.location.href = '/';
@@ -550,6 +464,7 @@
         }, 1000);
     }
 
+    // Save Order
     async function saveOrder() {
         if (!orderData) return;
         try {
@@ -560,7 +475,7 @@
                 items: orderData.items,
                 total: orderData.total,
                 status: 'confirmed',
-                paymentMethod: 'UPI',
+                paymentMethod: 'PayU',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         } catch (e) {
@@ -568,21 +483,15 @@
         }
     }
 
-    function goBack() {
-        clearInterval(timerInterval);
-        window.location.href = '/';
+    function retryPayment() {
+        document.getElementById('failedOverlay').classList.remove('show');
+        document.getElementById('payBtn').innerHTML = '<i class="fas fa-shield-alt"></i> Pay Now via PayU';
+        document.getElementById('payBtn').disabled = false;
     }
 
-    // Check if returning from PayU
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const status = urlParams.get('status');
-        if (status === 'success') {
-            showSuccess();
-        } else if (status === 'failed') {
-            document.getElementById('failedOverlay').classList.add('show');
-        }
-    };
+    function goBack() {
+        window.location.href = '/';
+    }
 </script>
 
 <!-- Firebase -->
