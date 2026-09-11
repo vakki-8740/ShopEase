@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - ShopEase</title>
+    <link rel="stylesheet" href="../user-panel/style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Admin Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="../user-panel/index.html" class="logo">Shop<span>Ease</span> <small style="font-size:0.7rem;color:#636e72;">Admin</small></a>
+        <div class="nav-links">
+            <a href="../user-panel/index.html"><i class="fas fa-store"></i> View Store</a>
+            <a href="#" id="adminLogout" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Admin Access Check -->
+<div id="accessDenied" style="display:none;text-align:center;padding:80px 20px;">
+    <i class="fas fa-lock" style="font-size:4rem;color:#d63031;margin-bottom:20px;"></i>
+    <h2>Access Denied</h2>
+    <p style="color:#636e72;">You don't have admin access. <a href="../user-panel/index.html">Go back to store</a></p>
+</div>
+
+<!-- Admin Content -->
+<div id="adminContent" style="display:none;">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-user">
+                <i class="fas fa-user-shield"></i>
+                <span id="adminName">Admin</span>
+            </div>
+            <ul class="admin-menu">
+                <li class="active" onclick="showSection('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+                <li onclick="showSection('products')"><i class="fas fa-box"></i> Products</li>
+                <li onclick="showSection('orders')"><i class="fas fa-shopping-bag"></i> Orders</li>
+                <li onclick="showSection('addProduct')"><i class="fas fa-plus-circle"></i> Add Product</li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="admin-section">
+                <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-box" style="color:#6c5ce7;"></i>
+                        <h3 id="totalProducts">0</h3>
+                        <p>Total Products</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shopping-bag" style="color:#00cec9;"></i>
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-rupee-sign" style="color:#00b894;"></i>
+                        <h3 id="totalRevenue">₹0</h3>
+                        <p>Total Revenue</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users" style="color:#e17055;"></i>
+                        <h3 id="totalUsers">0</h3>
+                        <p>Users</p>
+                    </div>
+                </div>
+                <div class="recent-orders" style="margin-top:30px;">
+                    <h3>Recent Orders</h3>
+                    <div id="recentOrdersList"></div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="section-products" class="admin-section" style="display:none;">
+                <h2><i class="fas fa-box"></i> All Products</h2>
+                <div id="adminProductsList"></div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="section-orders" class="admin-section" style="display:none;">
+                <h2><i class="fas fa-shopping-bag"></i> All Orders</h2>
+                <div id="adminOrdersList"></div>
+            </section>
+
+            <!-- Add Product Section -->
+            <section id="section-addProduct" class="admin-section" style="display:none;">
+                <h2><i class="fas fa-plus-circle"></i> Add New Product</h2>
+                <form class="admin-form" onsubmit="addProduct(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="prodName" required placeholder="Enter product name">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="prodCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="home">Home & Living</option>
+                                <option value="beauty">Beauty</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Price (₹)</label>
+                            <input type="number" id="prodPrice" required placeholder="Enter price" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Old Price (₹) - Optional</label>
+                            <input type="number" id="prodOldPrice" placeholder="Enter old price" min="1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Icon/Emoji</label>
+                            <input type="text" id="prodIcon" placeholder="e.g. 🎧 👟 💡" maxlength="4">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="number" id="prodStock" required placeholder="Enter stock qty" min="0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="prodDesc" rows="3" placeholder="Enter product description"></textarea>
+                    </div>
+                    <button type="submit" class="btn-add-product" id="addProdBtn">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </form>
+            </section>
+        </main>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
