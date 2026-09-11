@@ -1,28 +1,72 @@
-// Admin panel JavaScript
+// Admin panel JavaScript - Standalone
 
-// Check admin access
+const ADMIN_EMAIL = "shopadmin@gmail.com";
+const ADMIN_PASS = "shopadmin123";
+
+// Check if user is already logged in
 auth.onAuthStateChanged(async (user) => {
-    if (!user) {
-        window.location.href = '/';
-        return;
+    if (user) {
+        // Check if admin
+        if (user.email === ADMIN_EMAIL) {
+            showAdminPanel(user);
+        } else {
+            showAccessDenied();
+        }
+    } else {
+        showLoginForm();
     }
-
-    // Check if admin
-    const userDoc = await db.collection('users').doc(user.uid).get();
-    const isAdmin = (userDoc.exists && userDoc.data().role === 'admin') || user.email === ADMIN_EMAIL;
-
-    if (!isAdmin) {
-        document.getElementById('accessDenied').style.display = 'block';
-        document.getElementById('adminContent').style.display = 'none';
-        return;
-    }
-
-    document.getElementById('accessDenied').style.display = 'none';
-    document.getElementById('adminContent').style.display = 'block';
-    document.getElementById('adminName').textContent = user.displayName || user.email;
-
-    loadDashboard();
 });
+
+function showLoginForm() {
+    document.getElementById('adminLogin').style.display = 'flex';
+    document.getElementById('adminNavbar').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'none';
+    document.getElementById('accessDenied').style.display = 'none';
+}
+
+function showAdminPanel(user) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminNavbar').style.display = 'block';
+    document.getElementById('adminContent').style.display = 'block';
+    document.getElementById('accessDenied').style.display = 'none';
+    document.getElementById('adminName').textContent = user.displayName || user.email;
+    loadDashboard();
+}
+
+function showAccessDenied() {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminNavbar').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'none';
+    document.getElementById('accessDenied').style.display = 'block';
+}
+
+async function adminLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('adminEmail').value;
+    const pass = document.getElementById('adminPass').value;
+    const btn = document.getElementById('adminLoginBtn');
+    const errorEl = document.getElementById('loginError');
+
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+    btn.disabled = true;
+    errorEl.style.display = 'none';
+
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
+        // Auth state listener will handle the rest
+    } catch (error) {
+        errorEl.textContent = error.message;
+        errorEl.style.display = 'block';
+    }
+
+    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+    btn.disabled = false;
+}
+
+async function adminLogout() {
+    await auth.signOut();
+    showLoginForm();
+}
 
 function showSection(section) {
     document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
@@ -38,11 +82,9 @@ function showSection(section) {
 
 async function loadDashboard() {
     try {
-        // Products count
         const prodSnap = await db.collection('products').get();
         document.getElementById('totalProducts').textContent = prodSnap.size;
 
-        // Orders
         const orderSnap = await db.collection('orders').orderBy('createdAt', 'desc').get();
         document.getElementById('totalOrders').textContent = orderSnap.size;
 
@@ -54,7 +96,6 @@ async function loadDashboard() {
             const order = doc.data();
             revenue += order.total || 0;
 
-            // Show only 5 recent
             if (count < 5) {
                 const date = order.createdAt ? new Date(order.createdAt.seconds * 1000).toLocaleDateString() : 'N/A';
                 recentHtml += `
@@ -75,7 +116,6 @@ async function loadDashboard() {
         document.getElementById('totalRevenue').textContent = '₹' + revenue.toLocaleString();
         document.getElementById('recentOrdersList').innerHTML = recentHtml || '<p style="color:#636e72;">No orders yet.</p>';
 
-        // Users count
         const usersSnap = await db.collection('users').get();
         document.getElementById('totalUsers').textContent = usersSnap.size;
 
@@ -185,7 +225,6 @@ async function addProduct(e) {
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // Reset form
         e.target.reset();
         showToast('Product added successfully!', 'success');
     } catch (error) {
@@ -215,11 +254,6 @@ async function updateOrderStatus(orderId, status) {
     } catch (error) {
         showToast('Error: ' + error.message, 'error');
     }
-}
-
-async function adminLogout() {
-    await auth.signOut();
-    window.location.href = '/';
 }
 
 function showToast(message, type = '') {
