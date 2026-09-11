@@ -83,10 +83,7 @@ function renderProducts(products) {
                         ${p.oldPrice ? `<span class="price-old">₹${p.oldPrice.toLocaleString()}</span>` : ''}
                     </div>
                     <div class="product-actions">
-                        <button class="btn-add-cart" onclick='addToCart("${p.id}", ${JSON.stringify({ name: p.name, price: p.price, icon: p.icon })})'>
-                            <i class="fas fa-cart-plus"></i> Add to Cart
-                        </button>
-                        <button class="btn-buy-now" onclick='buyNow("${p.id}", ${JSON.stringify({ name: p.name, price: p.price, icon: p.icon })})'>
+                        <button class="btn-buy-now" onclick='buyNow("${p.id}", {name: "${p.name.replace(/'/g, "\\'")}", price: ${p.price}, icon: "${p.icon || '📦'}"})'>
                             <i class="fas fa-bolt"></i> Buy Now
                         </button>
                     </div>

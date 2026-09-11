@@ -333,27 +333,10 @@ body {
     gap: 8px;
 }
 
-.btn-add-cart {
-    flex: 1;
-    padding: 10px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.btn-add-cart:hover {
-    background: var(--primary-dark);
-}
-
 .btn-buy-now {
-    flex: 1;
-    padding: 10px;
-    background: var(--success);
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
     color: white;
     border: none;
     border-radius: 8px;
