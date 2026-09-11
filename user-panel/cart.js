@@ -1,5 +1,16 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Make functions globally accessible
+window.addToCart = addToCart;
+window.buyNow = buyNow;
+window.removeFromCart = removeFromCart;
+window.updateQty = updateQty;
+window.toggleCart = toggleCart;
+window.toggleMobileMenu = toggleMobileMenu;
+window.checkout = checkout;
+window.showMyOrders = showMyOrders;
+window.closeOrdersModal = closeOrdersModal;
+
 function saveCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
